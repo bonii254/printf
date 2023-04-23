@@ -6,31 +6,33 @@
    *
    * Return: the number of characters printed
    * (excluding the null byte used to end output to strings)
+   *
    */
 int _printf(const char *format, ...)
 {
-	int index = 0;
-	int sum = 0;
+	int index = 0, printed_len = 0;
+	/* char buffer[BUFF_SIZE]; */
 
 	va_list arg_list;
 
 	if (format == NULL)
-		return (sum);
+		return (printed_len);
 
 	va_start(arg_list, format);
 	while (format[index] != '\0')
 	{
 		if (format[index] != '%')
 		{
-			_putchar(format[index]);
+			write(1, &format[index], 1);
+			printed_len++;
 		}
 		else
 		{
 			++index;
-			sum += print_opt(format, &index, arg_list);
+			printed_len += output_opt(format, &index, arg_list);
 		}
+
 		index++;
-		}
-		va_end(arg_list);
-		return (sum);
+	}
+	return (printed_len);
 }
