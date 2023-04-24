@@ -3,6 +3,8 @@
 /**
   * print_char - print character to standard output.
   * @arg_list: list of arguements.
+  *
+  * Return: number of characters printed.
   */
 int print_char(va_list arg_list)
 {
@@ -14,6 +16,8 @@ int print_char(va_list arg_list)
 /**
   * print_string - print string to standard output.
   * @arg_list: list of arguements.
+  *
+  * Return: number of characters printed.
   */
 int print_string(va_list arg_list)
 {
@@ -29,6 +33,8 @@ int print_string(va_list arg_list)
 /**
   * print_percent - print % to standardout.
   * @arg_list: list of arguements.
+  *
+  * Return: number of characters printed.
   */
 int print_percent(va_list arg_list)
 {
