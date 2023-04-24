@@ -5,17 +5,20 @@
    * @format: is a character string.
    *
    * Return: the number of characters printed
-   * (excluding the null byte used to end output to strings)
+   * excluding the null byte used to end output to strings
+   * Description: this function print passed arguement to standard output
+   * stream and return the number of characters printed (excluding the null
+   * byte used to end output to strings)
    */
+
 int _printf(const char *format, ...)
 {
-	int index = 0, printed_len = 0;
-	/* char buffer[BUFF_SIZE]; */
+	int index = 0, printed_len = 0, printed_len_func;
 
 	va_list arg_list;
 
-	if (format == NULL)
-		return (printed_len);
+	if (!format)
+		return (--printed_len);
 
 	va_start(arg_list, format);
 	while (format[index] != '\0')
@@ -28,7 +31,10 @@ int _printf(const char *format, ...)
 		else
 		{
 			++index;
-			printed_len += output_opt(format, &index, arg_list);
+			printed_len_func =  output_opt(format, &index, arg_list);
+			if (printed_len_func < 0)
+				return (printed_len_func);
+			printed_len += printed_len_func;
 		}
 
 		index++;

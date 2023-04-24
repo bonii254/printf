@@ -13,8 +13,7 @@ int output_opt(const char *format, int *index, va_list arg_list)
 
 	p_opt opt[] = {
 		{'c', print_char}, {'s', print_string}, {'%', print_percent},
-		/*
-		 * {'i', print_int}, {'d', print_int}, {'b', print_binary},
+		{'i', print_int}, {'d', print_int}, /*{'b', print_binary},
 		 * {'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
 		 * {'X', print_hexa_upper}
 		 */ {'\0', NULL}

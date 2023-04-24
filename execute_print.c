@@ -10,8 +10,7 @@ int print_char(va_list arg_list)
 {
 	char c = va_arg(arg_list, int);
 
-	write(1, &c, 1);
-	return (1);
+	return (write(1, &c, 1));
 }
 /**
   * print_string - print string to standard output.
@@ -27,8 +26,7 @@ int print_string(va_list arg_list)
 	while (str[len] != '\0')
 		len++;
 
-	write(1, &str[0], len);
-	return (len);
+	return (write(1, &str[0], len));
 }
 /**
   * print_percent - print % to standardout.
@@ -39,6 +37,40 @@ int print_string(va_list arg_list)
 int print_percent(va_list arg_list)
 {
 	UNUSED(arg_list);
-	write(1, "%%", 1);
-	return (1);
+	return (write(1, "%%", 1));
+}
+
+/**
+  * print_int - print digits to standard output.
+  * @arg_list: list of arguements.
+  *
+  * Return: number of characters printed.
+  */
+
+int print_int(va_list args_list)
+{
+	int n = va_arg(args_list, int);
+	char buf[32];
+	int len = 0;
+	int i = 0;
+
+	if (n == 0)
+	{
+		buf[len++] = '0';
+	}
+	else if (n < 0)
+	{
+		buf[len++] = '-';
+		n = -n;
+	}
+	while (n > 0)
+	{
+		buf[len++] = (n % 10) + '0';
+		n /= 10;
+	}
+	for (i = len - 1; i >= 0; i--)
+	{
+		write(1, &buf[i], 1);
+	}
+	return len;
 }
