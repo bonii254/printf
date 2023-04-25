@@ -10,7 +10,7 @@ int print_char(va_list arg_list)
 {
 	char c = va_arg(arg_list, int);
 
-	return (write(1, &c, 1));
+	return (write(STDOUT_FILENO, &c, 1));
 }
 /**
   * print_string - print string to standard output.
@@ -26,7 +26,7 @@ int print_string(va_list arg_list)
 	while (str[len] != '\0')
 		len++;
 
-	return (write(1, &str[0], len));
+	return (write(STDOUT_FILENO, &str[0], len));
 }
 /**
   * print_percent - print % to standardout.
@@ -37,7 +37,7 @@ int print_string(va_list arg_list)
 int print_percent(va_list arg_list)
 {
 	UNUSED(arg_list);
-	return (write(1, "%%", 1));
+	return (write(STDOUT_FILENO, "%%", 1));
 }
 
 /**
@@ -74,7 +74,41 @@ int print_int(va_list args_list)
 		buf[len++] = '-';
 	for (i = len - 1; i >= 0; i--)
 	{
-		write(1, &buf[i], 1);
+		write(STDOUT_FILENO, &buf[i], 1);
 	}
 	return len;
 }
+
+/**
+  * print_binary - convert unsigned int to binary.
+  * @arg_list: list of arguements.
+  *
+  * Return: number of characters printed.
+  */
+
+int print_binary(va_list args_list)
+{
+	unsigned int n = va_arg(args_list, unsigned int);
+	int len = 0, i;
+	char buf[32];
+	int check = 0;
+
+	do
+	{
+		if (n % 2 == 0)
+			buf[len++] = '0';
+		else
+			buf[len++] = '1';
+		n /= 2;
+	}
+	while (n != 0);
+
+	for (i = len - 1; i >= 0; i--)
+	{
+		check = write(STDOUT_FILENO, &buf[i], 1);
+		if (check == -1)
+			return (-1);
+	}
+	return (len);
+}
+

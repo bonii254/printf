@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 	{
 		if (format[index] != '%')
 		{
-			check =  write(1, &format[index], 1);
+			check =  write(STDOUT_FILENO, &format[index], 1);
 			if (check == -1)
 				return (-1);
 			printed_len++;
