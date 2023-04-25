@@ -25,5 +25,8 @@ int output_opt(const char *format, int *index, va_list arg_list)
 			return (opt[i].func(arg_list));
 	i++;
 	}
-	return (0);
+
+	if (opt[i].str == '\0')
+		return (-1);
+	return (-1);
 }
