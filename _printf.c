@@ -34,7 +34,17 @@ int _printf(const char *format, ...)
 		else
 		{
 			++index;
-			printed_len_func =  output_opt(format, &index, arg_list);
+			if (format[index] == '-' || format[index] == '+' ||
+					format[index] == '0' || format[index] == ' '
+					|| format[index] == '#')
+			{
+				++index;
+				printed_len_func =  output_opt(format, &index, arg_list);
+			}
+			else
+			{
+				printed_len_func =  output_opt(format, &index, arg_list);
+			}
 			if (printed_len_func == -1)
 				return (printed_len_func);
 			printed_len += printed_len_func;

@@ -15,8 +15,7 @@ int output_opt(const char *format, int *index, va_list arg_list)
 		{'c', print_char}, {'s', print_string}, {'%', print_percent},
 		{'i', print_int}, {'d', print_int}, {'b', print_binary},
 		/*{'u', print_unsigned}, {'o', print_octal}, {'x', print_hexadecimal},
-		{'X', print_hexa_upper},*/ {'-', print_flag}, {'+', print_flag},
-		{'*', print_flag}, {'0', print_flag}, {'#', print_flag}, {'\0', NULL}
+		{'X', print_hexa_upper},*/ {'\0', NULL}
 	};
 
 	while (opt[i].str != '\0')
@@ -29,18 +28,4 @@ int output_opt(const char *format, int *index, va_list arg_list)
 	if (opt[i].str == '\0')
 		return (-1);
 	return (-1);
-}
-
-/**
-  * print_flag - check if flag is passed
-  * @arg_list: arguement list.
-  *
-  * Return: 0. 
-  * Description: return 0 to ignore use of flag
-  */
-
-int print_flag(va_list arg_list)
-{
-	UNUSED(arg_list);
-	return (0);
 }
