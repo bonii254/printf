@@ -53,21 +53,25 @@ int print_int(va_list args_list)
 	char buf[32];
 	int len = 0;
 	int i = 0;
+	int is_negative = 0;
 
 	if (n == 0)
 	{
 		buf[len++] = '0';
 	}
-	else if (n < 0)
+	if (n < 0)
 	{
-		buf[len++] = '-';
 		n = -n;
+		is_negative = 1;
+
 	}
 	while (n > 0)
 	{
 		buf[len++] = (n % 10) + '0';
 		n /= 10;
 	}
+	if (is_negative)
+		buf[len++] = '-';
 	for (i = len - 1; i >= 0; i--)
 	{
 		write(1, &buf[i], 1);
